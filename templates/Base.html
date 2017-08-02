@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>	
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/mdb.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/new.css') }}">
+        <style>
+            body{
+                background-image: url("https://image.freepik.com/free-vector/background-of-food-sketches-and-kitchen-objects_23-2147596568.jpg");
+            }
+
+        </style>
+		<script src="//apis.google.com/js/platform.js?onload=start"> </script>
+	
+		<title>Resturants Menu</title>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×</button>
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    SignIn Or SignUp</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8" style="border-right: 1px dotted #C2C2C2;padding-right: 30px;">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#Login" data-toggle="tab">Sign In </a></li>
+                            <li><a href="#Registration" data-toggle="tab">Sign Up </a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Login">
+                                <form role="form" class="form-horizontal" action="{{ url_for('login')}}" method="POST">
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">
+                                        E-mail</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" name="email" placeholder="Email" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1" class="col-sm-2 control-label">
+                                        Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" name="password" placeholder="password" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            SignIn</button>
+                                    
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="Registration">
+                                <form role="form" class="form-horizontal" method="POST" action="{{ url_for('register')}}">
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">
+                                        Name</label>
+                                    <div class="col-sm-10">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <input type="text" name="name" class="form-control" placeholder="Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">
+                                        E-mail</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" name="email" placeholder="Email" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-2 control-label">
+                                        Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" name="password" placeholder="Password" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Save & Continue</button>
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            Cancel</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="OR" class="hidden-xs">
+                            Or</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row text-center sign-with">
+                            <div class="col-md-12">
+                                <h3>
+                                    Login with</h3>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="btn-group btn-group-justified">
+										<div id="signInButton">
+										  <span class="g-signin"
+											data-scope="openid email"
+											data-clientid="41580094442-01t7hmdh7geqoskqekq1f2c75bvou5ef.apps.googleusercontent.com"
+											data-redirecturi="postmessage"
+											data-accesstype="offline"
+											data-cookiepolicy="single_host_origin"
+											data-callback="signInCallback"
+											data-approvalprompt="force">
+										  </span>
+										</div>
+								</div>		  
+								<div class="fb-login-button" 
+								onlogin="checkLoginState();" 
+								data-max-rows="1" 
+								data-size="medium"
+								data-button-type="continue_with"
+								data-show-faces="false" 
+								data-auto-logout-link="false" 
+								data-scope="public_profile,email">
+								</div>					
+						
+                            </div>
+							
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+			
+	</head>
+	<body>
+		<div class="container" >
+
+			<div class ="row">
+			{% if state is none %}
+				<div class="md-col-12 text-right">
+					<!-- Large modal -->
+					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+					Sign In
+					</button>
+				</div>			
+			{% else %}
+			<div class="md-col-12 text-right">
+				<form method="POST" action="{{ url_for('logout')}}"><button class="btn btn-primary" type="submit">Sign Out</button></form>
+			</div>
+			{% endif %}
+			
+			{% block content %}
+			{% endblock %}
+			
+			</div>	
+		</div>
+<script>
+
+function signInCallback(authResult) {
+  if (authResult['code']) {
+    // Hide the sign-in button now that the user is authorized
+    $('#signinButton').attr('style', 'display: none');
+    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+    $.ajax({
+      type: 'POST',
+      url: '/gconnect',
+      processData: false,
+      data: authResult['code'],
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+         setTimeout(function() {
+          window.location.href = "/restaurants";
+         }, 4000);
+          
+      } else if (authResult['error']) {
+    console.log('There was an error: ' + authResult['error']);
+  } else {
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+         }
+      }
+      
+  }); } }
+
+</script>
+		
+		
+		
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '2011042375795559',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.9'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+ (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=208379226305576";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+   
+   function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+		if (response.status === 'connected') {
+    // the user is logged in and has authenticated your
+    // app, and response.authResponse supplies
+    // the user's ID, a valid access token, a signed
+    // request, and the time the access token 
+    // and signed request each expire
+    var uid = response.authResponse.userID;
+    var accessToken = response.authResponse.accessToken;
+	console.log(accessToken);
+	
+	
+	
+	 $.ajax({
+      type: 'POST',
+      url: '/fbconnect',
+      processData: false,
+      data: accessToken,
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+        setTimeout(function() {
+          window.location.href = "/restaurants";
+         }, 4000);
+          
+      } else {
+        console.log("failed")
+         }
+      }
+	    });
+	
+	
+	
+	
+  }
+	
+	
+  });
+}
+   
+   
+ 
+  
+</script>
+
+	</body>
+</html>

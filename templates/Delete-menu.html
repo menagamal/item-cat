@@ -1,0 +1,19 @@
+{% extends "Base.html" %}
+{% block content %}	
+	<div class="row">
+		<div class = "md-col-12 text-center">
+		  <h3>Are you sure you want delete this item</h3>
+		</div>
+	</div>
+	<div class ="row">
+		<div class = "md-col-12 text-center">
+			<form method="POST" action="{{ url_for('deleteMenuItem',restaurant_id=restaurant_id,item_id=item_id)}}">
+				<input type="submit" class="btn btn-primary btn-danger" value="Delete">
+			
+				<a href="{{ url_for('Items',restaurant_id=restaurant_id)}} "><button  type="button" class="btn btn-primary btn-default">Cancel</button></a>
+			</form>
+		</div>
+
+
+
+{% endblock %}
